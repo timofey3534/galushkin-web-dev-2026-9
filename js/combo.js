@@ -1,3 +1,11 @@
+const order = {
+    soup: null,
+    main: null,
+    salad: null,
+    drink: null,
+    dessert: null
+};
+
 function hasDish(category) {
     return order[category] !== null;
 }
@@ -86,17 +94,23 @@ function showNotice(message) {
 }
 
 const orderForm = document.getElementById('order-form');
-orderForm.addEventListener('submit', function (event) {
-    const error = comboError();
-    if (error !== null) {
-        event.preventDefault();
-        showNotice(error);
-    }
-});
-orderForm.addEventListener('reset', function () {
-    Object.keys(order).forEach(function (category) {
-        order[category] = null;
+if (orderForm) {
+    orderForm.addEventListener('submit', function (event) {
+        const error = comboError();
+        if (error !== null) {
+            event.preventDefault();
+            showNotice(error);
+        }
     });
-    refreshSelection();
-    updateOrderBlock();
-});
+    orderForm.addEventListener('reset', function () {
+        Object.keys(order).forEach(function (category) {
+            order[category] = null;
+        });
+        if (typeof refreshSelection === 'function') {
+            refreshSelection();
+        }
+        if (typeof updateOrderBlock === 'function') {
+            updateOrderBlock();
+        }
+    });
+}
