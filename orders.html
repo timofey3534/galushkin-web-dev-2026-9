@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+        <title>ОбедПро — история заказов</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect"
+            href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/order.css">
+        <link rel="stylesheet" href="css/orders.css">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="logo">ОбедПро — история заказов</h1>
+                <nav class="site-nav">
+                    <ul>
+                        <li>
+                            <a href="index.html#about">О нас</a>
+                        </li>
+                        <li>
+                            <a href="lunch.html">Собрать ланч</a>
+                        </li>
+                        <li>
+                            <a href="order.html">Оформить заказ</a>
+                        </li>
+                        <li>
+                            <a href="orders.html" class="active">Заказы</a>
+                        </li>
+                        <li>
+                            <a href="#contacts">Контакты</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container">
+            <section class="orders-section">
+                <h2>История ваших заказов</h2>
+                <p id="orders-empty-msg" class="empty-message" hidden>
+                    У вас пока нет оформленных заказов. Чтобы сделать заказ,
+                    перейдите на страницу
+                    <a href="lunch.html">Собрать ланч</a>.
+                </p>
+                <div class="table-wrapper" id="orders-table-wrapper">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Дата оформления</th>
+                                <th>Состав заказа</th>
+                                <th>Стоимость</th>
+                                <th>Время доставки</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- Модальное окно просмотра -->
+        <div class="modal-overlay" id="view-modal" hidden>
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Просмотр заказа</h3>
+                    <button type="button" class="modal-close"
+                        data-action="close">×</button>
+                </div>
+                <div class="modal-body" id="view-modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-primary"
+                        data-action="close">Ок</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно редактирования -->
+        <div class="modal-overlay" id="edit-modal" hidden>
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Редактирование заказа</h3>
+                    <button type="button" class="modal-close"
+                        data-action="close">×</button>
+                </div>
+                <form id="edit-order-form">
+                    <div class="modal-body">
+                        <label for="edit-name">Имя</label>
+                        <input type="text" id="edit-name"
+                            name="full_name" required>
+                        <label for="edit-email">Email</label>
+                        <input type="email" id="edit-email"
+                            name="email" required>
+                        <label for="edit-phone">Номер телефона</label>
+                        <input type="tel" id="edit-phone"
+                            name="phone" required>
+                        <label for="edit-address">Адрес доставки</label>
+                        <input type="text" id="edit-address"
+                            name="delivery_address" required>
+                        <fieldset>
+                            <legend>Время доставки:</legend>
+                            <label class="check-label">
+                                <input type="radio" name="delivery_type"
+                                    value="now" id="edit-delivery-now" required>
+                                Как можно скорее
+                            </label>
+                            <label class="check-label">
+                                <input type="radio" name="delivery_type"
+                                    value="by_time" id="edit-delivery-time"
+                                    required>
+                                К указанному времени
+                            </label>
+                        </fieldset>
+                        <label for="edit-time">Укажите время доставки</label>
+                        <input type="time" id="edit-time"
+                            name="delivery_time" min="07:00" max="23:00"
+                            step="300">
+                        <label for="edit-comment">Комментарий к заказу</label>
+                        <textarea id="edit-comment" name="comment"
+                            rows="4"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary"
+                            data-action="close">Отмена</button>
+                        <button type="submit"
+                            class="btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Модальное окно подтверждения удаления -->
+        <div class="modal-overlay" id="delete-modal" hidden>
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>Удаление заказа</h3>
+                    <button type="button" class="modal-close"
+                        data-action="close">×</button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены, что хотите удалить этот заказ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary"
+                        data-action="close">Отмена</button>
+                    <button type="button" class="btn-danger"
+                        id="confirm-delete-btn">Да</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" id="contacts">
+            <div class="container">
+                <p>
+                    ОбедПро, Москва, улица Примерная, дом 1,
+                    работаем по будням с 11:00 до 15:00
+                </p>
+                <p>
+                    Телефон:
+                    <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+                </p>
+                <p>
+                    Почта:
+                    <a href="mailto:info@obedpro.ru">info@obedpro.ru</a>
+                </p>
+                <p>Галушкин Тимофей, группа 251-354, 2026</p>
+            </div>
+        </footer>
+        <script src="js/storage.js"></script>
+        <script src="js/dishes.js"></script>
+        <script src="js/combo.js"></script>
+        <script src="js/orders.js"></script>
+    </body>
+</html>

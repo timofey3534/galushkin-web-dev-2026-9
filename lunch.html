@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+        <title>ОбедПро — собрать ланч</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect"
+            href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/lunch.css">
+        <link rel="stylesheet" href="css/order.css">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="logo">ОбедПро — соберите свой ланч</h1>
+                <nav class="site-nav">
+                    <ul>
+                        <li>
+                            <a href="index.html#about">О нас</a>
+                        </li>
+                        <li>
+                            <a href="lunch.html" class="active">Собрать ланч</a>
+                        </li>
+                        <li>
+                            <a href="order.html">Оформить заказ</a>
+                        </li>
+                        <li>
+                            <a href="orders.html">Заказы</a>
+                        </li>
+                        <li>
+                            <a href="#contacts">Контакты</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container">
+            <section class="combos" id="combos">
+                <h2>Доступные для заказа комбо</h2>
+                <div class="combo-grid">
+                    <div class="combo">
+                        <div class="combo-item">
+                            <img src="images/icons/soup.png"
+                                width="80" height="80"
+                                alt="Суп">
+                            <p>Суп</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/main.png"
+                                width="80" height="80"
+                                alt="Главное блюдо">
+                            <p>Главное блюдо</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/salad.png"
+                                width="80" height="80"
+                                alt="Салат">
+                            <p>Салат</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/drink.png"
+                                width="80" height="80"
+                                alt="Напиток">
+                            <p>Напиток</p>
+                        </div>
+                    </div>
+                    <div class="combo">
+                        <div class="combo-item">
+                            <img src="images/icons/soup.png"
+                                width="80" height="80"
+                                alt="Суп">
+                            <p>Суп</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/main.png"
+                                width="80" height="80"
+                                alt="Главное блюдо">
+                            <p>Главное блюдо</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/drink.png"
+                                width="80" height="80"
+                                alt="Напиток">
+                            <p>Напиток</p>
+                        </div>
+                    </div>
+                    <div class="combo">
+                        <div class="combo-item">
+                            <img src="images/icons/soup.png"
+                                width="80" height="80"
+                                alt="Суп">
+                            <p>Суп</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/salad.png"
+                                width="80" height="80"
+                                alt="Салат">
+                            <p>Салат</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/drink.png"
+                                width="80" height="80"
+                                alt="Напиток">
+                            <p>Напиток</p>
+                        </div>
+                    </div>
+                    <div class="combo">
+                        <div class="combo-item">
+                            <img src="images/icons/main.png"
+                                width="80" height="80"
+                                alt="Главное блюдо">
+                            <p>Главное блюдо</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/salad.png"
+                                width="80" height="80"
+                                alt="Салат">
+                            <p>Салат</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/drink.png"
+                                width="80" height="80"
+                                alt="Напиток">
+                            <p>Напиток</p>
+                        </div>
+                    </div>
+                    <div class="combo">
+                        <div class="combo-item">
+                            <img src="images/icons/main.png"
+                                width="80" height="80"
+                                alt="Главное блюдо">
+                            <p>Главное блюдо</p>
+                        </div>
+                        <div class="combo-item">
+                            <img src="images/icons/drink.png"
+                                width="80" height="80"
+                                alt="Напиток">
+                            <p>Напиток</p>
+                        </div>
+                    </div>
+                    <div class="combo-note">
+                        <div class="combo-item">
+                            <img src="images/icons/desert.png"
+                                width="80" height="80"
+                                alt="Десерт">
+                            <p>Десерт</p>
+                        </div>
+                        <p class="combo-note-text">(Можно добавить к любому заказу)</p>
+                    </div>
+                </div>
+            </section>
+            <section class="menu-section" id="soups">
+                <h2>Выберите суп</h2>
+                <div class="filters">
+                    <button type="button" data-kind="fish">рыбный</button>
+                    <button type="button" data-kind="meat">мясной</button>
+                    <button type="button" data-kind="veg">вегетарианский</button>
+                </div>
+                <div class="dishes" id="soups-dishes"></div>
+            </section>
+            <section class="menu-section" id="mains">
+                <h2>Выберите главное блюдо</h2>
+                <div class="filters">
+                    <button type="button" data-kind="fish">рыбное</button>
+                    <button type="button" data-kind="meat">мясное</button>
+                    <button type="button" data-kind="veg">вегетарианское</button>
+                </div>
+                <div class="dishes" id="mains-dishes"></div>
+            </section>
+            <section class="menu-section" id="salads">
+                <h2>Выберите салат или стартер</h2>
+                <div class="filters">
+                    <button type="button" data-kind="fish">рыбный</button>
+                    <button type="button" data-kind="meat">мясной</button>
+                    <button type="button" data-kind="veg">вегетарианский</button>
+                </div>
+                <div class="dishes" id="salads-dishes"></div>
+            </section>
+            <section class="menu-section" id="drinks">
+                <h2>Выберите напиток</h2>
+                <div class="filters">
+                    <button type="button" data-kind="cold">холодный</button>
+                    <button type="button" data-kind="hot">горячий</button>
+                </div>
+                <div class="dishes" id="drinks-dishes"></div>
+            </section>
+            <section class="menu-section" id="desserts">
+                <h2>Выберите десерт</h2>
+                <div class="filters">
+                    <button type="button" data-kind="small">маленькая порция</button>
+                    <button type="button" data-kind="medium">средняя порция</button>
+                    <button type="button" data-kind="large">большая порция</button>
+                </div>
+                <div class="dishes" id="desserts-dishes"></div>
+            </section>
+        </main>
+        <div class="checkout-bar" id="checkout-bar" hidden>
+            <div class="container checkout-inner">
+                <div class="checkout-total">
+                    <span class="checkout-label">Итого:</span>
+                    <span class="checkout-price" id="checkout-price">0₽</span>
+                </div>
+                <a href="order.html" class="checkout-button disabled"
+                    id="checkout-button" aria-disabled="true">
+                    Перейти к оформлению
+                </a>
+            </div>
+        </div>
+        <footer class="site-footer" id="contacts">
+            <div class="container">
+                <p>
+                    ОбедПро, Москва, улица Примерная, дом 1,
+                    работаем по будням с 11:00 до 15:00
+                </p>
+                <p>
+                    Телефон:
+                    <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+                </p>
+                <p>
+                    Почта:
+                    <a href="mailto:info@obedpro.ru">info@obedpro.ru</a>
+                </p>
+                <p>Галушкин Тимофей, группа 251-354, 2026</p>
+            </div>
+        </footer>
+                <script src="js/storage.js"></script>
+        <script src="js/dishes.js"></script>
+        <script src="js/combo.js"></script>
+        <script src="js/display.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/lunch.js"></script>
+    </body>
+</html>\n
