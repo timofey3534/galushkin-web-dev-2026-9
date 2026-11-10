@@ -10,7 +10,7 @@ function getDishesApiUrl() {
     } catch (e) {
         // ignore
     }
-    return 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    return 'https://amd.dedyn.io:15243/labs/api/dishes';
 }
 
 const DISHES_API_URL = getDishesApiUrl();

@@ -10,7 +10,7 @@ function getOrdersApiUrl() {
     } catch (e) {
         // ignore
     }
-    return 'https://edu.std-900.ist.mospolytech.ru/labs/api/orders';
+    return 'https://amd.dedyn.io:15243/labs/api/orders';
 }
 
 let userOrders = [];
