@@ -1,5 +1,19 @@
-const DISHES_API_URL =
-    'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+function getDishesApiUrl() {
+    if (typeof getApiBaseUrl === 'function') {
+        return getApiBaseUrl() + '/labs/api/dishes';
+    }
+    try {
+        const base = localStorage.getItem('api_base_url');
+        if (base) {
+            return base.replace(/\/+$/, '') + '/labs/api/dishes';
+        }
+    } catch (e) {
+        // ignore
+    }
+    return 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+}
+
+const DISHES_API_URL = getDishesApiUrl();
 
 let dishes = [];
 
@@ -326,7 +340,7 @@ function normalizeCategory(category) {
 }
 
 function loadDishes() {
-    return fetch(DISHES_API_URL)
+    return fetch(getDishesApiUrl())
         .then(function (response) {
             if (!response.ok) {
                 throw new Error('HTTP ' + response.status);

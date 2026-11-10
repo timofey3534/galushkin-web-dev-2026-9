@@ -1,8 +1,13 @@
 const STORAGE_KEY = 'selected_dishes';
 const DEFAULT_API_KEY = '5a6e8284-90ab-4848-b4b6-58611186e88e';
+const DEFAULT_API_BASE = 'https://edu.std-900.ist.mospolytech.ru';
 
 function getApiKey() {
     return localStorage.getItem('api_key') || DEFAULT_API_KEY;
+}
+
+function getApiBaseUrl() {
+    return localStorage.getItem('api_base_url') || DEFAULT_API_BASE;
 }
 
 function getSelectedDishIds() {

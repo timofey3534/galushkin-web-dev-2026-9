@@ -1,5 +1,19 @@
-const API_ORDERS_URL =
-    'https://edu.std-900.ist.mospolytech.ru/labs/api/orders';
+function getOrdersApiUrl() {
+    if (typeof getApiBaseUrl === 'function') {
+        return getApiBaseUrl() + '/labs/api/orders';
+    }
+    try {
+        const base = localStorage.getItem('api_base_url');
+        if (base) {
+            return base.replace(/\/+$/, '') + '/labs/api/orders';
+        }
+    } catch (e) {
+        // ignore
+    }
+    return 'https://edu.std-900.ist.mospolytech.ru/labs/api/orders';
+}
+
+const API_ORDERS_URL = getOrdersApiUrl();
 
 const emptyTexts = {
     soup: 'Не выбран',
@@ -139,7 +153,8 @@ function initOrderPage() {
 }
 
 function sendOrderRequest(formData) {
-    const url = API_ORDERS_URL + '?api_key=' + encodeURIComponent(getApiKey());
+    const url = getOrdersApiUrl() + '?api_key=' +
+        encodeURIComponent(getApiKey());
     return fetch(url, {
         method: 'POST',
         body: formData

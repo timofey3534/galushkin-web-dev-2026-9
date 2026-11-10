@@ -41,7 +41,7 @@
         </header>
         <main class="container">
             <section class="orders-section">
-                <h2>История ваших заказов</h2>
+                <h2>История заказов</h2>
                 <p id="orders-empty-msg" class="empty-message" hidden>
                     У вас пока нет оформленных заказов. Чтобы сделать заказ,
                     перейдите на страницу
@@ -71,7 +71,7 @@
                 <div class="modal-header">
                     <h3>Просмотр заказа</h3>
                     <button type="button" class="modal-close"
-                        data-action="close">×</button>
+                        data-action="close" aria-label="Закрыть">×</button>
                 </div>
                 <div class="modal-body" id="view-modal-body"></div>
                 <div class="modal-footer">
@@ -87,49 +87,80 @@
                 <div class="modal-header">
                     <h3>Редактирование заказа</h3>
                     <button type="button" class="modal-close"
-                        data-action="close">×</button>
+                        data-action="close" aria-label="Закрыть">×</button>
                 </div>
                 <form id="edit-order-form">
                     <div class="modal-body">
-                        <label for="edit-name">Имя</label>
-                        <input type="text" id="edit-name"
-                            name="full_name" required>
-                        <label for="edit-email">Email</label>
-                        <input type="email" id="edit-email"
-                            name="email" required>
-                        <label for="edit-phone">Номер телефона</label>
-                        <input type="tel" id="edit-phone"
-                            name="phone" required>
-                        <label for="edit-address">Адрес доставки</label>
-                        <input type="text" id="edit-address"
-                            name="delivery_address" required>
-                        <fieldset>
-                            <legend>Время доставки:</legend>
-                            <label class="check-label">
-                                <input type="radio" name="delivery_type"
-                                    value="now" id="edit-delivery-now" required>
-                                Как можно скорее
-                            </label>
-                            <label class="check-label">
-                                <input type="radio" name="delivery_type"
-                                    value="by_time" id="edit-delivery-time"
-                                    required>
-                                К указанному времени
-                            </label>
-                        </fieldset>
-                        <label for="edit-time">Укажите время доставки</label>
-                        <input type="time" id="edit-time"
-                            name="delivery_time" min="07:00" max="23:00"
-                            step="300">
-                        <label for="edit-comment">Комментарий к заказу</label>
-                        <textarea id="edit-comment" name="comment"
-                            rows="4"></textarea>
+                        <div class="modal-info-row">
+                            <span class="modal-info-label">Дата оформления</span>
+                            <span id="edit-order-date"></span>
+                        </div>
+
+                        <h4 class="modal-section-title">Доставка</h4>
+                        <div class="form-group">
+                            <label for="edit-name">Имя получателя</label>
+                            <input type="text" id="edit-name"
+                                name="full_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-address">Адрес доставки</label>
+                            <input type="text" id="edit-address"
+                                name="delivery_address" required>
+                        </div>
+                        <div class="form-group">
+                            <span class="form-group-label">Тип доставки</span>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="delivery_type"
+                                        value="now" id="edit-delivery-now"
+                                        required>
+                                    Как можно скорее
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="delivery_type"
+                                        value="by_time" id="edit-delivery-time"
+                                        required>
+                                    Ко времени
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-time">Время доставки</label>
+                            <input type="time" id="edit-time"
+                                name="delivery_time" min="07:00" max="23:00"
+                                step="300">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-phone">Телефон</label>
+                            <input type="tel" id="edit-phone"
+                                name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-email">Email</label>
+                            <input type="email" id="edit-email"
+                                name="email" required>
+                        </div>
+
+                        <h4 class="modal-section-title">Комментарий</h4>
+                        <div class="form-group">
+                            <textarea id="edit-comment" name="comment"
+                                rows="3"></textarea>
+                        </div>
+
+                        <h4 class="modal-section-title">Состав заказа</h4>
+                        <div class="order-composition-list"
+                            id="edit-order-composition"></div>
+                        <div class="order-composition-total">
+                            <span>Стоимость:</span>
+                            <span id="edit-order-total"
+                                class="total-price"></span>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn-secondary"
+                        <button type="button" class="btn-cancel"
                             data-action="close">Отмена</button>
                         <button type="submit"
-                            class="btn-primary">Сохранить</button>
+                            class="btn-save">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -137,17 +168,17 @@
 
         <!-- Модальное окно подтверждения удаления -->
         <div class="modal-overlay" id="delete-modal" hidden>
-            <div class="modal-card">
+            <div class="modal-card modal-card-sm">
                 <div class="modal-header">
                     <h3>Удаление заказа</h3>
                     <button type="button" class="modal-close"
-                        data-action="close">×</button>
+                        data-action="close" aria-label="Закрыть">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Вы уверены, что хотите удалить этот заказ?</p>
+                    <p>Вы уверены, что хотите удалить заказ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-secondary"
+                    <button type="button" class="btn-cancel"
                         data-action="close">Отмена</button>
                     <button type="button" class="btn-danger"
                         id="confirm-delete-btn">Да</button>
@@ -158,8 +189,8 @@
         <footer class="site-footer" id="contacts">
             <div class="container">
                 <p>
-                    ОбедПро, Москва, улица Примерная, дом 1,
-                    работаем по будням с 11:00 до 15:00
+                    ОбедПро, Москва, ул. Большая Семёновская, дом 38,
+                    приём заказов с 11:00 до 15:00
                 </p>
                 <p>
                     Телефон:
@@ -169,7 +200,7 @@
                     Почта:
                     <a href="mailto:info@obedpro.ru">info@obedpro.ru</a>
                 </p>
-                <p>Галушкин Тимофей, группа 251-354, 2026</p>
+                <p>Тимофей Галушкин, группа 251-354, 2026</p>
             </div>
         </footer>
         <script src="js/storage.js"></script>
