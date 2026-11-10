@@ -13,15 +13,11 @@ function getDishImageUrl(dish) {
     if (!dish.image) {
         return 'images/lunch.jpg';
     }
-    let path = dish.image;
-    if (path.startsWith('http://') || path.startsWith('https://')) {
-        const idx = path.indexOf('images/');
-        if (idx !== -1) {
-            path = path.slice(idx + 7);
-        } else {
-            return path;
-        }
+    if (dish.image.startsWith('http://')
+        || dish.image.startsWith('https://')) {
+        return dish.image;
     }
+    let path = dish.image;
     if (path.startsWith('images/')) {
         path = path.slice(7);
     }
